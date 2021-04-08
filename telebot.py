@@ -1,5 +1,5 @@
 import telebot
-import parse
+import looking_for_vacancies
 import words
 
 bot = telebot.TeleBot('1496906755:AAGWQlB_BhGJCne7kRLc4FmVjNfquUUE1vw')
@@ -15,26 +15,57 @@ dialogue = {
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
+    """
+    Приветствующее сообщение на команду /start
+
+    :param message: переменная
+    :type message: telebot.object
+    :return: случайное приветствие
+    """
     bot.send_message(message.chat.id, words.helos())
 
 
 @bot.message_handler(commands=['help'])
 def start_message(message):
+    """
+    Вывод умений бота
+    :param message: переменная
+    :type message: telebot.object
+    :return: список умений бота
+    """
     bot.send_message(message.chat.id, words.dos)
 
 
 @bot.message_handler(commands=['goods'])
 def start_message(message):
+    """
+    Похвальное сообщение на команду goods
+    :param message: переменная
+    :type message: telebot.object
+    :return: случайная похвала
+    """
     bot.send_message(message.chat.id, words.oods())
 
 
 @bot.message_handler(commands=['vacancy'])
 def start_message(message):
-    bot.send_message(message.chat.id, parse.answers)
+    """
+    Вывод вакансий сметчиков
+    :param message: переменная
+    :type message: telebot.object
+    :return: список вакансий сметчиков в Москве с высокими зарплатами
+    """
+    bot.send_message(message.chat.id, looking_for_vacancies.answers)
 
 
 @bot.message_handler(content_types=['text'])
 def send_text(message):
+    """
+    Ответ на то или иное сообщение от пользователя
+    :param message: сообщение от пользовательтеля
+    :type message: telebot.object
+    :return: ответ на введёное сообщение
+    """
     mess = message.text.lower()
 
     if mess == "привет":
@@ -51,6 +82,12 @@ def send_text(message):
 
 @bot.message_handler(content_types=['sticker'])
 def sticker_id(message):
+    """
+    Вывод стикера
+    :param message: переменная
+    :type message: telebot.object
+    :return: стикер
+    """
     print(message)
 
 
